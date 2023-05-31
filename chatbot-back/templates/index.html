@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot: Le Sportif </title>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    
+    <style>
+    
+        body{
+          font-family: monospace;  
+        }
+        #chatbox{
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;
+            margin-top: 50px;
+        }
+        .botText{
+            font-family: monospace;
+            font-size: 16px;
+            text-align: left;
+            line-height: 25px;
+            color: rgb(12, 89, 205);
+            padding: 30px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,.2);
+            border-radius: 10px;
+            min-width: 260px; 
+        }
+        #userInput{
+            margin-left: auto;
+            margin-left: auto;
+            width: 80%;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #textInput{
+            border: 3px solid white;
+            border-bottom: 3px dotted #657889;
+            font-family: monospace;
+            font-size: 16px;
+            width:60%;
+            padding:20px;
+            color: rgb(9, 9, 9);
+        }
+        #buttonInput{
+            padding: 5px;
+            font-family: monospace;
+            font-size: 16px;
+            padding: 10px;
+            border: 3px solid #baceff;
+            background-color: rgb(1, 32, 99);
+            color: #baceff;
+            border-radius: 10px;
+        }
+        h3{
+          padding: 30px;
+          box-shadow: 0px 5px 15px rgba(3, 26, 109, 0.2);
+          border-radius: 10px;
+          min-width: 260px; 
+          text-align: center;  
+          color: rgb(12, 89, 205);
+          
+        }
+      .userText{
+        text-align: left;
+        font-family: monospace;
+        font-size: 16px;
+        line-height: 25px;
+        color: rgb(255, 255, 255);
+        padding: 30px;
+        box-shadow: 0px 5px 15px rgba(0,0,0,.2);
+        border-radius: 10px;
+        min-width: 260px; 
+        background-color:rgb(109, 168, 255)
+        
+        }
+      
+      
+
+    </style> 
+    
+</head>
+<body>
+  
+    
+    <h3>Le Sportif </h3>
+    <div>
+      <div id="chatbox">
+        <p class="botText">
+          <span>
+            Le Sportif: Salut, je suis heureux de te voir aujourd'hui.
+            je m'appelle Le Sportif,je suis un agent conversationnel qui reponds à tous vos besoins sportives.
+            Comment je peux t'aider ?  
+          </span>
+        </p>
+      </div>
+     <div id="userInput">
+        <input id="textInput" type="text" name="userMessage" placeholder="écrire ton messasge..."/>
+        <input id="buttonInput" type="submit" value="Envoyer"/>
+     </div>  
+    </div>
+   
+</body>
+
+<script>
+   function getUserResponse(){
+    var userText =$('#textInput').val();
+    var userHTML = "<p class='userText'> Utilisateur: <span>"+userText+"</span></p>";
+    $('#textInput').val("");
+    $('#chatbox').append(userHTML);
+    document.getElementById("userInput").scrollIntoView({block:'start',behavior:'smooth'});
+    $.get("/get",{userMessage:userText}).done(function(data){
+      var botHTML = "<p class='botText'>Le Sportif: <span>"+data+"</span></p>"
+      $('#chatbox').append(botHTML);
+    });
+
+  }
+  $("#textInput").keypress(function(e){
+    if(e.which == 13){
+        getUserResponse();
+    } 
+  });
+
+  $('#buttonInput').click(function(){
+    getUserResponse();
+   }) 
+
+
+
+
+</script>
+</html>

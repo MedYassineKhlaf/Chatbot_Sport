@@ -1,0 +1,10 @@
+CREATE DATABASE user;
+use user ;
+CREATE TABLE user (
+  iduser INT NOT NULL AUTO_INCREMENT,
+  userName VARCHAR(50) NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  password VARCHAR(50) NOT NULL,
+  numeroTel VARCHAR(20) NOT NULL,
+  PRIMARY KEY (iduser)
+);
